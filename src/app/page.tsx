@@ -18,7 +18,7 @@ export default function Home() {
       {/* Hero: animated demo set, "past the failure line" */}
       <Hero />
 
-      {/* 01 · Shop gear */}
+      {/* 01 · Equipment */}
       <section
         aria-labelledby="gear-title"
         className="flex flex-col gap-6 px-4 py-24 sm:px-8 lg:px-12"
@@ -28,7 +28,7 @@ export default function Home() {
             id="gear-title"
             className="font-display text-[clamp(3rem,7vw,4.5rem)] font-black leading-[0.9]"
           >
-            SHOP GEAR
+            EQUIPMENT
           </h2>
           <p className="font-mono text-xs uppercase tracking-[0.12em]">
             Tap a category to open it
@@ -92,7 +92,7 @@ export default function Home() {
         aria-labelledby="journal-title"
         className="px-4 pb-24 sm:px-8 lg:px-12"
       >
-        <Reveal className="grid items-end gap-8 border-t-[3px] border-ink pt-8 lg:grid-cols-2">
+        <Reveal className="grid items-stretch gap-8 border-t-[3px] border-ink pt-8 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-[11px] uppercase tracking-[0.14em]">
               From the journal · Oct 2026 · 4 min read
@@ -122,7 +122,7 @@ export default function Home() {
             </figure>
             <Link
               href="/blog/welcome"
-              className="group inline-flex items-center gap-2.5 self-start bg-ink px-5 py-3.5 font-mono text-xs uppercase tracking-[0.14em] text-chalk transition-colors duration-300 hover:bg-ember"
+              className="group mt-1 inline-flex items-center gap-2.5 self-start bg-ink px-5 py-3.5 font-mono text-xs uppercase tracking-[0.14em] text-chalk transition-colors duration-300 hover:bg-ember"
             >
               Read the post
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
@@ -133,7 +133,7 @@ export default function Home() {
 
           <nav
             aria-label="In this post"
-            className="flex aspect-video flex-col justify-between gap-4 bg-ink p-5 text-chalk sm:p-8"
+            className="flex flex-col justify-between gap-4 bg-ink p-5 text-chalk sm:p-8"
           >
             <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-ash">
               <span>In this post</span>

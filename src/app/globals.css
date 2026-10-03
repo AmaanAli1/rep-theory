@@ -179,6 +179,21 @@ body {
   transform: scale(1.06);
 }
 
+/* Gear tags in a program's sample week */
+.gear-chip {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.gear-chip:hover {
+  background: var(--color-ink);
+  color: var(--color-chalk);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--color-accent);
+}
+
 /* Program cards: same orange lift */
 .program-card {
   transition:
@@ -215,6 +230,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .product-card:hover,
   .program-card:hover,
+  .gear-chip:hover,
   .product-card:hover .blueprint svg {
     transform: none;
   }

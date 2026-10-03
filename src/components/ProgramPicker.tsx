@@ -34,7 +34,7 @@ export default function ProgramPicker() {
                 aria-expanded={on}
                 aria-controls="program-details"
                 onClick={() => toggle(p.slug)}
-                className={`program-card flex h-full w-full flex-col gap-8 border-2 border-ink p-6 text-left ${
+                className={`program-card @container flex h-full w-full flex-col gap-8 border-2 border-ink p-6 text-left ${
                   on ? "bg-ink text-chalk" : ""
                 }`}
               >
@@ -45,7 +45,7 @@ export default function ProgramPicker() {
                 >
                   {p.spec}
                 </span>
-                <span className="font-display text-[2.75rem] font-black uppercase leading-[0.9] [overflow-wrap:anywhere]">
+                <span className="font-display text-[min(2.75rem,12.5cqi)] font-black uppercase leading-[0.9]">
                   {p.name}
                 </span>
                 <span className="mt-auto flex w-full items-center justify-between gap-3">
@@ -142,7 +142,7 @@ export default function ProgramPicker() {
                     {formatPrice(program)}
                   </span>
                   <Link
-                    href={`/products/${program.slug}`}
+                    href={`/programs/${program.slug}`}
                     className="bg-accent px-7 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-ink transition-transform hover:-translate-y-0.5"
                   >
                     {details.cta}

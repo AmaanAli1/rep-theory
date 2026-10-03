@@ -50,7 +50,7 @@ export default function SiteFooter() {
           </li>
         </ul>
         <span className="text-ash">
-          © 2026 Rep Theory · A CP340 student project
+          © 2026 Rep Theory · CP340-B group project
         </span>
       </div>
     </footer>

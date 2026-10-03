@@ -25,7 +25,7 @@ const LIFTS: Lift[] = [
     failAt: 6,
     gear: "Wrist wraps",
     shopLabel: "Shop wraps",
-    shopHref: "/products#wraps",
+    shopHref: "/equipment#wraps",
     going: "Wrists are going.",
     holds: "Wraps hold.",
   },
@@ -37,7 +37,7 @@ const LIFTS: Lift[] = [
     failAt: 4,
     gear: "Lifting straps",
     shopLabel: "Shop straps",
-    shopHref: "/products#straps",
+    shopHref: "/equipment#straps",
     going: "Grip is going.",
     holds: "Straps hold.",
   },
@@ -49,7 +49,7 @@ const LIFTS: Lift[] = [
     failAt: 8,
     gear: "MAG-style lat bar",
     shopLabel: "Shop attachments",
-    shopHref: "/products#attachments",
+    shopHref: "/equipment#attachments",
     going: "Grip is going.",
     holds: "The bar locks in.",
   },
@@ -63,21 +63,21 @@ const pillars = [
     title: "Your grip quits first.",
     body: "Straps take grip out of the equation, so your back and lats decide when the set ends.",
     cta: "Shop straps",
-    href: "/products#straps",
+    href: "/equipment#straps",
   },
   {
     num: "02 · Stability",
     title: "Stacked wrists. Heavier presses.",
     body: "Wrist wraps keep your joints locked in under heavy bench and overhead work.",
     cta: "Shop wraps",
-    href: "/products#wraps",
+    href: "/equipment#wraps",
   },
   {
     num: "03 · Range",
     title: "Full stretch. Every rep.",
     body: "A neutral-grip lat bar and custom rope let you train through a fuller range of motion.",
     cta: "Shop attachments",
-    href: "/products#attachments",
+    href: "/equipment#attachments",
   },
   {
     num: "04 · The plan",
@@ -85,7 +85,7 @@ const pillars = [
     title: "Programs by coaches.",
     body: "Hypertrophy, strength and cutting plans written by [Coach name, credential], or 1:1 coaching.",
     cta: "Find a program",
-    href: "/#programs",
+    href: "#programs", // same page: scrolls to the Programs section below
     featured: true,
   },
 ];
@@ -366,29 +366,69 @@ export default function Hero() {
       <ul className="grid border-l-2 border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((p) => (
           <li key={p.num} className="border-b-2 border-r-2 border-ink">
-            <Link
-              href={p.href}
-              className={`group flex h-full flex-col gap-3.5 p-6 transition-colors duration-300 ${
-                p.featured
-                  ? "bg-ember text-[#f4f1ea] hover:bg-rust"
-                  : "hover:bg-ink hover:text-chalk"
-              }`}
-            >
-              <span className="font-mono text-[11px] uppercase tracking-[0.14em]">
-                {p.num}
-              </span>
-              <span className="font-display text-4xl font-black uppercase leading-[0.9]">
-                {p.title}
-              </span>
-              <span className="text-[15px] leading-normal">{p.body}</span>
-              <span
-                className={`mt-auto inline-block font-mono text-[11px] uppercase tracking-[0.14em] transition-transform duration-300 group-hover:translate-x-1 ${
-                  p.featured ? "" : "group-hover:text-accent"
+            {p.href.startsWith("#") ? (
+              // Plain anchor + scrollIntoView so it scrolls every time, not
+              // just the first (Next's Link ignores a hash the URL already has)
+              <a
+                href={p.href}
+                onClick={(e) => {
+                  const target = document.getElementById(p.href.slice(1));
+                  if (!target) return;
+                  e.preventDefault();
+                  const reduce = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                  ).matches;
+                  target.scrollIntoView({
+                    behavior: reduce ? "auto" : "smooth",
+                    block: "start",
+                  });
+                }}
+                className={`group flex h-full flex-col gap-3.5 p-6 transition-colors duration-300 ${
+                  p.featured
+                    ? "bg-ember text-[#f4f1ea] hover:bg-rust"
+                    : "hover:bg-ink hover:text-chalk"
                 }`}
               >
-                {p.cta} →
-              </span>
-            </Link>
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em]">
+                  {p.num}
+                </span>
+                <span className="font-display text-4xl font-black uppercase leading-[0.9]">
+                  {p.title}
+                </span>
+                <span className="text-[15px] leading-normal">{p.body}</span>
+                <span
+                  className={`mt-auto inline-block font-mono text-[11px] uppercase tracking-[0.14em] transition-transform duration-300 group-hover:translate-x-1 ${
+                    p.featured ? "" : "group-hover:text-accent"
+                  }`}
+                >
+                  {p.cta} →
+                </span>
+              </a>
+            ) : (
+              <Link
+                href={p.href}
+                className={`group flex h-full flex-col gap-3.5 p-6 transition-colors duration-300 ${
+                  p.featured
+                    ? "bg-ember text-[#f4f1ea] hover:bg-rust"
+                    : "hover:bg-ink hover:text-chalk"
+                }`}
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em]">
+                  {p.num}
+                </span>
+                <span className="font-display text-4xl font-black uppercase leading-[0.9]">
+                  {p.title}
+                </span>
+                <span className="text-[15px] leading-normal">{p.body}</span>
+                <span
+                  className={`mt-auto inline-block font-mono text-[11px] uppercase tracking-[0.14em] transition-transform duration-300 group-hover:translate-x-1 ${
+                    p.featured ? "" : "group-hover:text-accent"
+                  }`}
+                >
+                  {p.cta} →
+                </span>
+              </Link>
+            )}
           </li>
         ))}
       </ul>

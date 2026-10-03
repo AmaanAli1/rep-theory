@@ -64,7 +64,7 @@ export default function CategoryAccordion() {
                     ))}
                   </ul>
                   <Link
-                    href={`/products#${cat.id}`}
+                    href={`/equipment#${cat.id}`}
                     className="self-start font-mono text-xs uppercase tracking-[0.14em] underline-offset-4 hover:underline"
                   >
                     View all {cat.name} →

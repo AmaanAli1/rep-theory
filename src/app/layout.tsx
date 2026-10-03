@@ -7,6 +7,8 @@ import {
 } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import BackToTop from "@/components/BackToTop";
+import ScrollReset from "@/components/ScrollReset";
 import "./globals.css";
 
 const bigShoulders = Big_Shoulders({
@@ -47,6 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-CA"
+      data-scroll-behavior="smooth"
       className={`${bigShoulders.variable} ${plexSans.variable} ${plexMono.variable} ${instrumentSerif.variable} antialiased`}
     >
       <body className="flex min-h-dvh flex-col">
@@ -56,10 +59,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <ScrollReset />
         <SiteHeader />
-        <main id="main" className="flex-1">
+        <main id="main" tabIndex={-1} className="flex-1 outline-none">
           {children}
         </main>
+        <BackToTop />
         <SiteFooter />
       </body>
     </html>

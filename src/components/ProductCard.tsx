@@ -8,7 +8,7 @@ export default function ProductCard({ product: p }: { product: Product }) {
 
   return (
     <Link
-      href={`/products/${p.slug}`}
+      href={`/equipment/${p.slug}`}
       className="product-card flex h-full items-center gap-4 bg-paper p-3"
     >
       <div className="blueprint size-24 shrink-0 overflow-hidden">
