@@ -1,26 +1,237 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ---------------------------------------------------------------
+   Rep Theory design tokens
+   Chalk ground, ink type, one signal-orange accent.
+---------------------------------------------------------------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0e0e0e;
+  --color-chalk: #eceae4;
+  --color-paper: #ffffff;
+  --color-stone: #5f5c55; /* quiet text on light (6:1 on white) */
+  --color-ash: #a6a39c; /* quiet text on ink */
+  --color-accent: #ff5a1f;
+  --color-ember: #b8400f; /* deep orange for large fills */
+  --color-rust: #933210; /* ember on hover */
+  --color-caution: #f2c94c; /* fatigue: working */
+  --color-danger: #e5322d; /* fatigue: failure */
+
+  --font-display: var(--font-big-shoulders);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-chalk);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Striped placeholders until real photos and video arrive */
+.ph-dark {
+  background-color: #1a1a1a;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.04) 0 1px,
+    transparent 1px 14px
+  );
+}
+.ph-light {
+  background-color: #d9d6ce;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(0 0 0 / 0.05) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+/* ---------------------------------------------------------------
+   Motion
+---------------------------------------------------------------- */
+
+/* Hero headline: each line slides up out of a mask */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+.line-mask > span {
+  display: inline-block;
+  animation: line-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.line-mask:nth-child(2) > span {
+  animation-delay: 0.12s;
+}
+.line-mask:nth-child(3) > span {
+  animation-delay: 0.24s;
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Sections rise in once as they scroll into view (see Reveal.tsx) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Accordion panel: animates height with the grid-rows trick */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.accordion-panel > div {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.accordion-panel[data-open="true"] > div {
+  opacity: 1;
+}
+.accordion-panel[data-open="true"] .accordion-card {
+  animation: card-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.accordion-card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.accordion-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.accordion-card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Product cards: lift with an orange offset */
+.product-card {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.product-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+/* Blueprint drawings: ink on grid paper, inverting to blueprint mode on hover */
+.blueprint {
+  color: var(--color-ink);
+  background-color: #f4f2ec;
+  background-image:
+    linear-gradient(rgb(14 14 14 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(14 14 14 / 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+.blueprint svg {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.product-card:hover .blueprint {
+  color: var(--color-chalk);
+  background-color: var(--color-ink);
+  background-image:
+    linear-gradient(rgb(236 234 228 / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(236 234 228 / 0.1) 1px, transparent 1px);
+}
+.product-card:hover .blueprint svg {
+  transform: scale(1.06);
+}
+
+/* Program cards: same orange lift */
+.program-card {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.program-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* "View →" labels fade and slide in on hover */
+.card-arrow {
+  opacity: 0.55;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+.product-card .card-arrow {
+  opacity: 0;
+}
+.product-card:hover .card-arrow,
+.program-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Program details panel */
+.panel-in {
+  animation: card-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Everyone who asks for less motion gets none */
+@media (prefers-reduced-motion: reduce) {
+  .product-card:hover,
+  .program-card:hover,
+  .product-card:hover .blueprint svg {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
