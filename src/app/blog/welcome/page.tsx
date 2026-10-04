@@ -73,6 +73,12 @@ export default function WelcomePost() {
             brand to work: simple gear, honest programs and no hype.
           </p>
           <p>
+            The purpose of this site is to be the storefront for Rep Theory: a 
+            place to browse our gear and training programs, read what we&apos;re
+            building, and see how we handle your data. It&apos;s also the 
+            foundation we&apos'll keep building on through the term.
+          </p>
+          <p>
             Between us we&apos;ve spent a lot of hours under a bar, and a lot of
             those hours ended the same way: not because the muscle we were
             training gave out, but because something else did first. You can
