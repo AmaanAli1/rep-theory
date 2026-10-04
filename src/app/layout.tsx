@@ -9,6 +9,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import BackToTop from "@/components/BackToTop";
 import ScrollReset from "@/components/ScrollReset";
+import CookieBanner from "@/components/CookieBanner";
+import ProjectNote from "@/components/ProjectNote";
 import "./globals.css";
 
 const bigShoulders = Big_Shoulders({
@@ -65,6 +67,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <BackToTop />
+        <ProjectNote />
+        <CookieBanner />
         <SiteFooter />
       </body>
     </html>

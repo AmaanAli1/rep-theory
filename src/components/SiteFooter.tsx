@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-ink px-4 py-12 text-chalk sm:px-8 lg:px-12">
+    <footer className="bg-ink px-4 pb-24 pt-12 text-chalk sm:px-8 sm:pb-12 sm:pr-24 lg:pl-12">
       <div className="flex flex-wrap items-center justify-between gap-6 font-mono text-[11px] uppercase tracking-[0.12em]">
         <Link
           href="/"
@@ -20,13 +20,12 @@ export default function SiteFooter() {
             </Link>
           </li>
           <li>
-            {/* Wired to the cookie consent banner in the privacy step */}
-            <button
-              type="button"
-              className="uppercase transition-colors duration-300 hover:text-accent"
+            <Link
+              href="/privacy#cookie-settings"
+              className="transition-colors duration-300 hover:text-accent"
             >
               Cookie settings
-            </button>
+            </Link>
           </li>
           <li>
             <a
