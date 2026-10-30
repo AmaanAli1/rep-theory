@@ -10,12 +10,12 @@ const notes = [
     body: "Products, prices, programs and the coach are made up for the assignment.",
   },
   {
-    title: "Nothing is for sale.",
-    body: "Add to cart and checkout are switched off. No payment details are ever collected.",
+    title: "Payments are test-only.",
+    body: "Checkout runs in Stripe test mode. Use card 4242 4242 4242 4242; no real money moves and nothing ships.",
   },
   {
     title: "Not a final product.",
-    body: "A first version covering Assignment 1's scope, not a finished store.",
+    body: "Built across Assignments 1 and 2, not a finished store.",
   },
   {
     title: "Not fitness or medical advice.",
@@ -26,13 +26,13 @@ const notes = [
 const facts = [
   {
     k: "In scope",
-    v: "Home, Equipment + Programs (10 products), Journal with an intro post, About, Privacy + cookie settings",
+    v: "A1: home, products, journal, about, privacy. A2: shopping cart, Stripe test checkout, SEO, content marketing posts, social media",
   },
-  { k: "Team", v: "Amaan Ali, Ronnie Abed, Harsh Shekhar" },
-  { k: "Built with", v: "Next.js, TypeScript, Tailwind CSS · hosted on Vercel" },
+  { k: "Team", v: "Ronnie Abed, Harsh Shekhar · Amaan Ali (consulting)" },
+  { k: "Built with", v: "Next.js, TypeScript, Tailwind CSS, Stripe (test mode) · hosted on Vercel" },
 ];
 
-/** Yellow "CP340-B · Assignment 1" side tab that slides out a project note. */
+/** Yellow "CP340-B · Assignment 2" side tab that slides out a project note. */
 export default function ProjectNote() {
   const [open, setOpen] = useState(false);
   const panel = useRef<HTMLElement>(null);
@@ -94,7 +94,7 @@ export default function ProjectNote() {
           open ? "right-[min(27.5rem,92vw)]" : "right-0"
         }`}
       >
-        CP340-B<span className="hidden sm:inline"> · Assignment 1</span>
+        CP340-B<span className="hidden sm:inline"> · Assignment 2</span>
       </button>
 
       <div
@@ -142,7 +142,7 @@ export default function ProjectNote() {
             </h2>,
             <p key="p" className="font-serif text-2xl italic leading-[1.15]">
               Rep Theory is a concept store built for CP340-B (E-commerce) at
-              Wilfrid Laurier University, Assignment 1.
+              Wilfrid Laurier University, Assignments 1 and 2.
             </p>,
             <ul key="u" className="border-t border-ink">
               {notes.map((n) => (

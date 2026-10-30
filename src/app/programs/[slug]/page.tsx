@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProgramSheet from "@/components/ProgramSheet";
 import FaqList from "@/components/FaqList";
+import JsonLd from "@/components/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+import BuyProgramButton from "@/components/BuyProgramButton";
 import {
   Breadcrumb,
   PairsWellWith,
@@ -28,7 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = findProgram(slug);
   if (!p) return {};
-  return { title: `${p.name} Program`, description: p.details?.goal };
+  return {
+    title: p.priceNote ? `${p.name}: Online Strength Coaching` : `${p.name} Program: 12-Week Plan`,
+    description: `${p.details?.goal} ${p.details?.who}`,
+    keywords: [`${p.name.toLowerCase()} program`, "12 week training program", "workout plan", "online coaching"],
+    alternates: { canonical: `/programs/${p.slug}` },
+  };
 }
 
 /** Header row + rows with the same fixed columns, so everything lines up */
@@ -54,6 +62,25 @@ export default async function ProgramPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: p.name,
+          description: p.longDescription ?? p.description,
+          sku: p.code,
+          category: p.priceNote ? "Online coaching subscription" : "Digital training program",
+          brand: { "@type": "Brand", name: SITE_NAME },
+          url: `${SITE_URL}/programs/${p.slug}`,
+          offers: {
+            "@type": "Offer",
+            price: p.price.toFixed(2),
+            priceCurrency: "CAD",
+            availability: "https://schema.org/InStock",
+            url: `${SITE_URL}/programs/${p.slug}`,
+          },
+        }}
+      />
       <section className="flex flex-col gap-6 px-4 pb-16 pt-7 sm:px-8 lg:px-12">
         <Breadcrumb
           crumbs={[{ href: "/programs", label: "Programs" }]}
@@ -105,19 +132,7 @@ export default async function ProgramPage({ params }: Props) {
                 </ul>
               </div>
             </div>
-            <button
-              type="button"
-              disabled
-              className="flex cursor-not-allowed items-center justify-between bg-ink px-7 py-4.5 text-left font-display text-2xl font-extrabold uppercase tracking-wide text-ash"
-            >
-              {details.cta}
-              <span className="font-mono text-base">{formatPrice(p)}</span>
-            </button>
-            <p className="-mt-3.5 font-mono text-[11px] uppercase tracking-[0.08em] text-stone">
-              {p.priceNote
-                ? "Applications open soon."
-                : "Checkout opens soon. Instant download after purchase."}
-            </p>
+            <BuyProgramButton product={p} />
           </div>
         </div>
       </section>

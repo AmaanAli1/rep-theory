@@ -404,7 +404,7 @@ export const categories: Category[] = [
             },
             {
               q: "How do I get the program?",
-              a: "Right after checkout you get a download link for the PDF and the spreadsheet tracker. Checkout opens with our next update.",
+              a: "Right after checkout you get a download link for the PDF and the spreadsheet tracker. Checkout runs on Stripe (test mode for this project).",
             },
           ],
         },
@@ -508,7 +508,7 @@ export const categories: Category[] = [
             },
             {
               q: "How do I get the program?",
-              a: "Right after checkout you get a download link for the PDF and tracker. Checkout opens with our next update.",
+              a: "Right after checkout you get a download link for the PDF and tracker. Checkout runs on Stripe (test mode for this project).",
             },
           ],
         },
@@ -598,7 +598,7 @@ export const categories: Category[] = [
             },
             {
               q: "How do I get the program?",
-              a: "Right after checkout you get a download link for the PDF, calculator and tracker. Checkout opens with our next update.",
+              a: "Right after checkout you get a download link for the PDF, calculator and tracker. Checkout runs on Stripe (test mode for this project).",
             },
           ],
         },
@@ -634,7 +634,7 @@ export const categories: Category[] = [
           faqs: [
             {
               q: "Who is the coach?",
-              a: "[Coach name, credential]. Every plan is written and reviewed by a real person, not generated.",
+              a: "A Rep Theory coach. Every plan is written and reviewed by a real person, not generated.",
             },
             {
               q: "How do check-ins work?",
@@ -646,7 +646,7 @@ export const categories: Category[] = [
             },
             {
               q: "When can I start?",
-              a: "Applications open with our next update. Until then, the digital programs are a great place to begin.",
+              a: "Right away. Subscribe from this page and your coach emails the intake form within 24 hours. You can cancel any month.",
             },
           ],
         },

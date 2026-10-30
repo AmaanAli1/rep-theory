@@ -12,7 +12,7 @@ export default function ProductCard({ product: p }: { product: Product }) {
       className="product-card flex h-full items-center gap-4 bg-paper p-3"
     >
       <div className="blueprint size-24 shrink-0 overflow-hidden">
-        {p.drawing && <ProductDrawing kind={p.drawing} className="size-full" />}
+        {p.drawing && <ProductDrawing kind={p.drawing} className="size-full" alt={`Technical drawing of the ${p.name}`} />}
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2">

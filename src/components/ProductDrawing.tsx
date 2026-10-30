@@ -151,17 +151,20 @@ function Lines({ kind }: { kind: DrawingKind }) {
   }
 }
 
+/** Blueprint line drawing. Pass `alt` to expose it as an image with alt text. */
 export default function ProductDrawing({
   kind,
   className = "",
+  alt,
 }: {
   kind: DrawingKind;
   className?: string;
+  alt?: string;
 }) {
   return (
     <svg
       viewBox="0 0 96 96"
-      aria-hidden="true"
+      {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
       className={className}
       fill="none"
       stroke="currentColor"
