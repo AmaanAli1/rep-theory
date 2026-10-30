@@ -1,6 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import QtyStepper from "@/components/QtyStepper";
+import { addToCart } from "@/lib/cart";
 import GearDrawing from "@/components/GearDrawing";
 import { formatCad, formatPrice, type Product } from "@/data/catalog";
 
@@ -26,6 +28,24 @@ export default function GearCustomizer({
 
   const colour = colours[colourIndex];
   const preview = text || "YOUR NAME";
+  const [justAdded, setJustAdded] = useState(false);
+  const addedTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(addedTimer.current), []);
+
+  const add = () => {
+    addToCart(
+      {
+        slug: p.slug,
+        colour: colour?.name,
+        choice: p.choices?.[0] ? choice[p.choices[0].label] : undefined,
+        text: p.custom ? text.trim() || undefined : undefined,
+      },
+      qty,
+    );
+    setJustAdded(true);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setJustAdded(false), 2000);
+  };
   const firstChoice = p.choices?.[0] ? choice[p.choices[0].label] : undefined;
 
   return (
@@ -174,47 +194,20 @@ export default function GearCustomizer({
         )}
 
         <div className="flex flex-wrap items-stretch gap-3">
-          <div
-            role="group"
-            aria-label="Quantity"
-            className="flex border-2 border-ink"
-          >
-            <button
-              type="button"
-              aria-label="Decrease quantity"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="w-12 text-xl transition-colors hover:bg-ink hover:text-chalk"
-            >
-              −
-            </button>
-            <span
-              aria-live="polite"
-              className="flex min-w-12 items-center justify-center border-x-2 border-ink font-mono text-lg"
-            >
-              {qty}
-            </span>
-            <button
-              type="button"
-              aria-label="Increase quantity"
-              onClick={() => setQty((q) => Math.min(10, q + 1))}
-              className="w-12 text-xl transition-colors hover:bg-ink hover:text-chalk"
-            >
-              +
-            </button>
-          </div>
+          <QtyStepper qty={qty} onChange={setQty} />
           <button
             type="button"
-            disabled
-            className="flex flex-1 cursor-not-allowed items-center justify-between bg-ink px-7 py-4.5 font-display text-2xl font-extrabold tracking-wide text-ash"
+            onClick={add}
+            className="group flex flex-1 items-center justify-between border-2 border-ink bg-ink px-7 py-4 font-display text-2xl font-extrabold tracking-wide text-chalk transition-colors duration-300 hover:border-ember hover:bg-ember"
           >
-            ADD TO CART
+            {justAdded ? "✓ ADDED" : "ADD TO CART"}
             <span className="font-mono text-base">
               {formatCad(p.price * qty)}
             </span>
           </button>
         </div>
         <p className="-mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-stone">
-          Checkout opens soon. This store isn&apos;t taking orders yet.
+          Free shipping on gear over $75 · Test store, no real charges
         </p>
         <span className="sr-only">Category: {categoryName}</span>
       </div>

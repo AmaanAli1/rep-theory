@@ -29,7 +29,7 @@ export default function CategoryAccordion() {
                   open ? "bg-ink text-chalk" : "hover:bg-ink hover:text-chalk"
                 }`}
               >
-                <span className="font-display text-[clamp(2.5rem,6vw,3.5rem)] font-extrabold uppercase leading-none">
+                <span className="min-w-0 break-words font-display text-[clamp(2rem,10vw,3.5rem)] font-extrabold uppercase leading-none sm:text-[clamp(2.5rem,6vw,3.5rem)]">
                   {cat.num} {cat.name}
                 </span>
                 <span className="flex items-center gap-6 font-mono text-xs uppercase tracking-[0.12em]">

@@ -8,6 +8,8 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { SITE_NAME, SITE_URL, SOCIAL } from "@/lib/site";
 import ScrollReset from "@/components/ScrollReset";
 import CookieBanner from "@/components/CookieBanner";
 import ProjectNote from "@/components/ProjectNote";
@@ -39,12 +41,29 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Rep Theory | Lifting Gear & Coaching Programs",
+    default: "Rep Theory | Lifting Straps, Wrist Wraps & Training Programs",
     template: "%s | Rep Theory",
   },
   description:
-    "Lifting straps, wrist wraps, cable attachments and coaching programs built for the last rep.",
+    "Custom lifting straps, wrist wraps, cable attachments and 12-week training programs, built for the last rep. Designed in Waterloo, Ontario. Prices in CAD.",
+  keywords: [
+    "lifting straps",
+    "custom lifting straps",
+    "wrist wraps",
+    "gym accessories Canada",
+    "hypertrophy program",
+    "strength training",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_CA",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -61,6 +80,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: `${SITE_URL}/icon.svg`,
+            email: "hello@reptheory.ca",
+            sameAs: SOCIAL.flatMap((s) => (s.url ? [s.url] : [])),
+          }}
+        />
         <ScrollReset />
         <SiteHeader />
         <main id="main" tabIndex={-1} className="flex-1 outline-none">

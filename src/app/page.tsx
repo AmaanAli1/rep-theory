@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CategoryAccordion from "@/components/CategoryAccordion";
 import Reveal from "@/components/Reveal";
 import ProgramPicker from "@/components/ProgramPicker";
+import SocialBand from "@/components/SocialBand";
 
 // Sections of the intro post, linked from the journal teaser
 const postSections = [
@@ -166,6 +167,9 @@ export default function Home() {
           </nav>
         </Reveal>
       </section>
+
+      {/* 05 · Social */}
+      <SocialBand />
     </>
   );
 }

@@ -5,7 +5,8 @@ import CookieSettings from "@/components/CookieSettings";
 import { PRIVACY_EMAIL } from "@/data/journal";
 
 export const metadata: Metadata = {
-  title: "Privacy",
+  title: "Privacy Policy & Cookie Settings",
+  alternates: { canonical: "/privacy" },
   description:
     "How Rep Theory handles your information, which cookies we use, your rights under PIPEDA, and your cookie settings.",
 };
@@ -30,7 +31,7 @@ const short = [
 ];
 
 const cookieTable = [
-  { type: "Essential", does: "Remembers your cookie choice and, later, your cart.", def: "Always on" },
+  { type: "Essential", does: "Remembers your cookie choice and what's in your cart (stored in your browser, not on our servers).", def: "Always on" },
   { type: "Analytics", does: "Counts page views anonymously so we know what's useful.", def: "Off" },
   { type: "Marketing", does: "Would measure ads on social media. Not used yet.", def: "Off" },
 ];
@@ -71,7 +72,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageIntro
-        metaLeft="Privacy · Last updated Oct 4, 2026"
+        metaLeft="Privacy · Last updated Oct 30, 2026"
         metaRight="PIPEDA · Canada"
         title="Privacy"
         tag="The short version"
@@ -96,9 +97,9 @@ export default function PrivacyPage() {
 
         <div className="text-lg leading-[1.7] [&_p]:mb-4.5">
           <p className="font-mono text-xs! uppercase leading-[1.7]! tracking-[0.08em] text-stone">
-            Rep Theory is a CP340-B group project. The store isn&apos;t taking
-            orders, but this policy describes how the site handles your
-            information today and when checkout opens.
+            Rep Theory is a CP340-B group project. Checkout runs in Stripe test
+            mode, so no real orders or payments are taken, but this policy
+            describes exactly how the site handles your information.
           </p>
 
           <H2 index={0} />
@@ -108,7 +109,8 @@ export default function PrivacyPage() {
               <><B>Your cookie choice.</B> Saved in your browser so we don&apos;t ask again.</>,
               <><B>What you send us.</B> Your email and message, if you contact us.</>,
               <><B>With your OK only:</B> anonymous page-view counts (which pages are visited, not who visited them).</>,
-              <><B>When checkout opens:</B> your name, shipping address and email to deliver your order.</>,
+              <><B>Your cart.</B> Saved in your browser only, so it&apos;s still there when you come back.</>,
+              <><B>When you check out:</B> Stripe collects your name, email, card and (for gear) shipping address. We receive your name, email, city and order details to confirm the order, never your card number.</>,
             ]}
           />
           <p>
@@ -151,7 +153,7 @@ export default function PrivacyPage() {
               "To run the site and remember your settings.",
               "To answer your messages.",
               "To see which pages help people, using anonymous counts, if you allow it.",
-              "When checkout opens: to process and ship your order.",
+              "To process and ship your order, and to run your coaching subscription.",
             ]}
           />
           <p>
@@ -162,9 +164,11 @@ export default function PrivacyPage() {
           <H2 index={3} />
           <p>
             Only the services that keep the site running: our hosting provider
-            (Vercel) serves the pages, and when checkout opens, a certified
-            payment processor will handle payments. They only get what they need
-            for that job. We&apos;ll list any new service here before we use it.
+            (Vercel) serves the pages, and Stripe, a certified payment
+            processor, handles checkout and subscriptions. They only get what
+            they need for that job. Share buttons are plain links, so X,
+            Facebook and LinkedIn learn nothing until you choose to share.
+            We&apos;ll list any new service here before we use it.
           </p>
 
           <H2 index={4} />
@@ -188,7 +192,8 @@ export default function PrivacyPage() {
             items={[
               "Every page is served over HTTPS (encrypted).",
               "Security headers stop other sites from framing our pages or loading unexpected scripts.",
-              "We never see or store card numbers. When checkout opens, payment details go straight to a PCI-compliant processor.",
+              "Prices are re-checked on our server at checkout, so a cart edited in the browser can't change what you pay.",
+              "We never see or store card numbers. Payment details go straight to Stripe, a PCI-compliant processor. This site runs Stripe in test mode, so no real payments are taken.",
               "Only the team can access messages you send us.",
             ]}
           />

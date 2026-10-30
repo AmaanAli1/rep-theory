@@ -204,7 +204,7 @@ export default function Hero() {
       <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
         <h1
           id="hero-title"
-          className="font-display text-[clamp(5rem,12vw,12rem)] font-black leading-[0.8] tracking-tight"
+          className="font-display text-[clamp(5rem,12vw,12rem)] font-black leading-[0.8] tracking-tight max-[389px]:text-[18vw]"
         >
           <span className="line-mask">
             <span>THE LAST</span>

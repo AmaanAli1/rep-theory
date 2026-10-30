@@ -22,7 +22,7 @@ export default function ShopCard({
           {p.code} · Fig. {fig}
         </span>
         {p.drawing && (
-          <ProductDrawing kind={p.drawing} className="size-[62%]" />
+          <ProductDrawing kind={p.drawing} className="size-[62%]" alt={`Technical drawing of the ${p.name}`} />
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2.5 p-5">

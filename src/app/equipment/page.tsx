@@ -4,7 +4,9 @@ import ShopCard from "@/components/ShopCard";
 import { gearCategories } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Equipment",
+  title: "Lifting Gear: Straps, Wrist Wraps & Lat Bars",
+  keywords: ["lifting straps", "custom lifting straps", "wrist wraps", "lat pulldown bar", "tricep rope", "barbell clips", "gym equipment Canada"],
+  alternates: { canonical: "/equipment" },
   description:
     "Lifting straps, wrist wraps, cable attachments and barbell clips from Rep Theory.",
 };
@@ -60,7 +62,7 @@ export default function EquipmentPage() {
             <div className="flex flex-wrap items-baseline justify-between gap-4 border-b-[3px] border-ink pb-3">
               <h2
                 id={`${cat.id}-title`}
-                className="font-display text-[clamp(2.5rem,10vw,3.75rem)] font-black uppercase leading-[0.9]"
+                className="min-w-0 break-words font-display text-[clamp(2rem,10vw,3.75rem)] font-black uppercase leading-[0.9]"
               >
                 {cat.num} {cat.name}
               </h2>

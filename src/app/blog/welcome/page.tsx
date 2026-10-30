@@ -5,6 +5,8 @@ import { CONTACT_EMAIL, welcomePost as post } from "@/data/journal";
 
 export const metadata: Metadata = {
   title: post.title,
+  keywords: ["Rep Theory", "lifting gear brand", "about Rep Theory"],
+  alternates: { canonical: "/blog/welcome" },
   description: post.excerpt,
   openGraph: { type: "article", publishedTime: post.date },
 };
@@ -67,16 +69,16 @@ export default function WelcomePost() {
         <div className="text-lg leading-[1.7] [&_p]:mb-4.5">
           <SectionHeading index={0} />
           <p>
+            The purpose of this site is to be the storefront for Rep Theory: a
+            place to browse our gear and training programs, read what we&apos;re
+            building, and see how we handle your data. It&apos;s also the
+            foundation we&apos;ll keep building on through the term.
+          </p>
+          <p>
             Rep Theory is a small team of students and lifters at Wilfrid
             Laurier University in Waterloo, Ontario. We started it as a class
             project in fall 2026, and built it the way we&apos;d want a gym
             brand to work: simple gear, honest programs and no hype.
-          </p>
-          <p>
-            The purpose of this site is to be the storefront for Rep Theory: a 
-            place to browse our gear and training programs, read what we&apos;re
-            building, and see how we handle your data. It&apos;s also the 
-            foundation we&apos'll keep building on through the term.
           </p>
           <p>
             Between us we&apos;ve spent a lot of hours under a bar, and a lot of
@@ -167,10 +169,20 @@ export default function WelcomePost() {
 
           <SectionHeading index={3} />
           <p>
-            Checkout isn&apos;t open yet. Next we&apos;re adding a working cart
-            and secure checkout, the free program assessment, and more posts
-            here: how to set up lifting straps, why deload weeks matter, and how
-            to run a cut without losing strength.
+            Update: the cart and secure checkout are now live (in test mode for
+            this project), and the first posts are up:{" "}
+            <Link href="/blog/how-to-set-up-lifting-straps" className="underline decoration-1 underline-offset-[3px] transition-colors hover:text-ember">
+              how to set up lifting straps
+            </Link>
+            ,{" "}
+            <Link href="/blog/deload-weeks-explained" className="underline decoration-1 underline-offset-[3px] transition-colors hover:text-ember">
+              why deload weeks matter
+            </Link>{" "}
+            and{" "}
+            <Link href="/blog/cutting-without-losing-strength" className="underline decoration-1 underline-offset-[3px] transition-colors hover:text-ember">
+              how to cut without losing strength
+            </Link>
+            . The free program assessment is next.
           </p>
           <p>
             Got a question or an idea for a post? Write to us at {CONTACT_EMAIL}.

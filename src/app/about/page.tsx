@@ -4,7 +4,8 @@ import PageIntro from "@/components/PageIntro";
 import { CONTACT_EMAIL } from "@/data/journal";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us",
+  alternates: { canonical: "/about" },
   description:
     "Rep Theory is a CP340-B group project from Wilfrid Laurier University: gear and programs built for the last rep.",
 };
@@ -21,9 +22,13 @@ const timeline = [
   {
     when: "Oct 2026",
     what: "Assignment 1: the store goes live, gear and programs first.",
+  },
+  {
+    when: "Oct 2026",
+    what: "Assignment 2: cart, Stripe checkout, coaching subscriptions and the journal.",
     now: true,
   },
-  { when: "Next", what: "A working cart, secure checkout and the free assessment.", future: true },
+  { when: "Next", what: "The free program assessment.", future: true },
 ];
 
 const beliefs = [
@@ -41,8 +46,8 @@ const beliefs = [
   },
 ];
 
-const team = [
-  { name: "Amaan Ali", initials: "A.A.", role: "Developer · Front end + design" },
+const team: { name: string; initials: string; role: string; consulting?: boolean }[] = [
+  { name: "Amaan Ali", initials: "A.A.", role: "Former member · Consulting developer", consulting: true },
   { name: "Ronnie Abed", initials: "R.A.", role: "Developer · Back end" },
   { name: "Harsh Shekhar", initials: "H.S.", role: "Developer · Full stack" },
 ];
@@ -160,7 +165,7 @@ export default function AboutPage() {
             <ol>
               {timeline.map((t) => (
                 <li
-                  key={t.when}
+                  key={t.what}
                   className="grid grid-cols-[4.5rem_0.875rem_minmax(0,1fr)] items-baseline gap-3 py-2"
                 >
                   <span
@@ -216,13 +221,39 @@ export default function AboutPage() {
             The team
           </h2>
           <span className="font-mono text-[11px] uppercase tracking-[0.12em]">
-            03 developers · Wilfrid Laurier University
+            02 developers + 01 consultant · Wilfrid Laurier University
           </span>
         </div>
         <ul className="mt-4 grid gap-4 md:grid-cols-3">
           {team.map((m, i) => (
-            <li key={m.name} className="product-card flex flex-col border-2 border-ink bg-paper">
-              <div className="blueprint relative flex aspect-[4/3] items-center justify-center [background-size:16px_16px]">
+            <li
+              key={m.name}
+              tabIndex={m.consulting ? 0 : undefined}
+              className={`flex flex-col border-2 border-ink bg-paper ${
+                m.consulting ? "consult-card group outline-none" : "product-card"
+              }`}
+            >
+              <div className="blueprint relative flex aspect-[4/3] items-center justify-center overflow-hidden [background-size:16px_16px]">
+                {m.consulting && (
+                  <>
+                    <span className="consult-tag absolute bottom-3 left-0 z-[2] bg-caution py-1.5 pl-3 pr-4 font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-ink transition-opacity group-hover:opacity-0 group-focus-visible:opacity-0">
+                      Consulting
+                    </span>
+                    <div className="consult-over absolute inset-0 z-[3] flex flex-col justify-end gap-2.5 bg-ink/95 p-4.5 text-chalk">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-caution">
+                        Status · Consulting
+                      </span>
+                      <p className="font-serif text-[1.3rem] italic leading-[1.15]">
+                        Unfortunately, Amaan had to drop CP340-B due to unforeseen
+                        circumstances, but he&apos;s still consulting for the team.
+                      </p>
+                      <p className="text-[13px] leading-normal text-[#d8d5cd]">
+                        He designed and built this site, and still helps with design,
+                        code and the Stripe checkout.
+                      </p>
+                    </div>
+                  </>
+                )}
                 <span className="absolute left-3 top-2.5 font-mono text-[10px] uppercase tracking-[0.14em]">
                   {m.initials}
                 </span>
@@ -294,7 +325,7 @@ export default function AboutPage() {
         <dl className="grid grid-cols-[8rem_1fr] text-[17px] sm:grid-cols-[10rem_1fr]">
           {[
             ["Email", CONTACT_EMAIL],
-            ["Social", "Instagram + TikTok · coming soon"],
+            ["Social", "Instagram · launching soon"],
             ["Based in", "Waterloo, Ontario · prices in CAD"],
           ].map(([k, v]) => (
             <div key={k} className="contents">

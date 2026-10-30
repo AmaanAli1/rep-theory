@@ -14,10 +14,13 @@ export default function ScrollSpyToc({
   label,
   items,
   size = "text-[1.375rem]",
+  sticky = true,
 }: {
   label: string;
   items: Item[];
   size?: string;
+  /** Turn off when a parent column is already sticky (nested sticky overlaps siblings). */
+  sticky?: boolean;
 }) {
   const [active, setActive] = useState<string | null>(null);
 
@@ -68,7 +71,7 @@ export default function ScrollSpyToc({
   return (
     <nav
       aria-label={label}
-      className="flex flex-col gap-2 lg:sticky lg:top-24"
+      className={`flex flex-col gap-2 ${sticky ? "lg:sticky lg:top-24" : ""}`}
     >
       <span className="border-b-2 border-ink pb-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-stone">
         {label}

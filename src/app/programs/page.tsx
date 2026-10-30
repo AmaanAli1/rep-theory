@@ -4,7 +4,9 @@ import { blockWeeks } from "@/components/ProgramSheet";
 import { formatPrice, programs, productHref } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Programs",
+  title: "12-Week Training Programs & 1:1 Coaching",
+  keywords: ["hypertrophy program", "cutting program", "strength program", "12 week workout plan", "online coaching"],
+  alternates: { canonical: "/programs" },
   description:
     "12-week hypertrophy, cutting and strength plans, plus 1:1 coaching from Rep Theory.",
 };
@@ -159,8 +161,8 @@ export default function ProgramsPage() {
           aria-labelledby="coaching-title"
           className="bg-ink px-4 py-[clamp(3rem,6vw,6rem)] text-chalk sm:px-8 lg:px-12"
         >
-          <div className="grid items-end gap-10 lg:grid-cols-2">
-            <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-[minmax(0,1fr)] items-end gap-10 lg:grid-cols-2">
+            <div className="flex min-w-0 flex-col gap-4">
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
                 {coaching.code} · {coaching.details.format}
               </span>

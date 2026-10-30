@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import AddedPopup from "@/components/AddedPopup";
+import CartDrawer from "@/components/CartDrawer";
+import { onAdded, useCart } from "@/lib/cart";
+import { priceCart } from "@/lib/pricing";
 
 const links = [
   { href: "/equipment", label: "Equipment" },
@@ -13,6 +18,13 @@ const links = [
 export default function SiteHeader() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { count } = priceCart(useCart());
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+  const onCartPage = usePathname() === "/cart";
+
+  // Bring the header back into view when something is added
+  useEffect(() => onAdded(() => setHidden(false)), []);
 
   // Hide on scroll down, show again on scroll up
   useEffect(() => {
@@ -67,12 +79,31 @@ export default function SiteHeader() {
           </button>
           <Link
             href="/cart"
+            aria-haspopup={onCartPage ? undefined : "dialog"}
+            aria-expanded={onCartPage ? undefined : drawerOpen}
+            aria-controls={onCartPage ? undefined : "mini-cart"}
+            onClick={(e) => {
+              // Open the mini cart instead of navigating (new-tab clicks still work)
+              if (onCartPage || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+              e.preventDefault();
+              setMenuOpen(false);
+              setDrawerOpen(true);
+            }}
             className="text-accent transition-colors duration-300 hover:text-chalk"
           >
-            CART [0]
+            CART{" "}
+            <span
+              aria-label={`${count} items`}
+              className="ml-1 inline-flex h-5 min-w-5 items-center justify-center bg-accent px-1.5 font-medium text-ink"
+            >
+              {count}
+            </span>
           </Link>
         </div>
       </div>
+
+      <AddedPopup />
+      <CartDrawer open={drawerOpen} onClose={closeDrawer} />
 
       {menuOpen && (
         <nav

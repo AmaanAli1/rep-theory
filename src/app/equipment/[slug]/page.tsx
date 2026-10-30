@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GearCustomizer from "@/components/GearCustomizer";
+import JsonLd from "@/components/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   Breadcrumb,
   PairsWellWith,
@@ -29,8 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const found = findGear(slug);
   if (!found) return {};
   return {
-    title: found.product.name,
+    title: `${found.product.name}: ${found.product.spec}`,
     description: found.product.longDescription ?? found.product.description,
+    keywords: [found.product.name.toLowerCase(), found.category.name.toLowerCase(), "lifting gear", "gym accessories"],
+    alternates: { canonical: `/equipment/${found.product.slug}` },
   };
 }
 
@@ -42,6 +46,24 @@ export default async function GearPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: p.name,
+          description: p.longDescription ?? p.description,
+          sku: p.code,
+          brand: { "@type": "Brand", name: SITE_NAME },
+          url: `${SITE_URL}/equipment/${p.slug}`,
+          offers: {
+            "@type": "Offer",
+            price: p.price.toFixed(2),
+            priceCurrency: "CAD",
+            availability: "https://schema.org/InStock",
+            url: `${SITE_URL}/equipment/${p.slug}`,
+          },
+        }}
+      />
       <section className="flex flex-col gap-6 px-4 pb-16 pt-7 sm:px-8 lg:px-12">
         <Breadcrumb
           crumbs={[
