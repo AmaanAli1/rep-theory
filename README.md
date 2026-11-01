@@ -19,6 +19,8 @@
 
 [Live site](https://rep-theory.vercel.app) · [Assignment 2](#-assignment-2-checklist) · [Features](#-features) · [Architecture](#-architecture) · [Getting started](#-getting-started) · [Roadmap](#-roadmap)
 
+![Rep Theory homepage](docs/screenshot.png)
+
 </div>
 
 ---
@@ -38,9 +40,9 @@ Built for CP340-B: **Assignment 1** launched the storefront; **Assignment 2** ad
 
 | | Name | Role |
 |:-:|---|---|
-| 01 | **Ronnie Abed** | Developer · Back end |
-| 02 | **Harsh Shekhar** | Developer · Full stack |
-| 03 | **Amaan Ali** | Former member (dropped the course) · built the site, still consulting |
+| 01 | **Amaan Ali** | **Lead developer · Full stack.** Designed and built the site end to end: storefront, cart and mini cart, Stripe checkout with subscriptions, journal, SEO, design system and Vercel deployment |
+| 02 | **Ronnie Abed** | Payment testing and SEO evidence |
+| 03 | **Harsh Koli** | Content marketing plan, social media strategy and report editing |
 
 All three of us are BSc Computer Science students at Wilfrid Laurier University.
 
@@ -151,7 +153,7 @@ All three of us are BSc Computer Science students at Wilfrid Laurier University.
 flowchart LR
     Dev["💻 Developer<br/>git push"] --> GH["GitHub<br/>main branch"]
     GH -->|webhook| Build["Vercel build<br/>next build"]
-    Build -->|"pre-renders 21 pages<br/>(static + SSG)"| CDN["Vercel Edge CDN<br/>+ security headers"]
+    Build -->|"pre-renders every page<br/>(static + SSG)"| CDN["Vercel Edge CDN<br/>+ security headers"]
     CDN -->|HTML, CSS, JS| Browser["🌐 Visitor's browser"]
     Browser -->|hydrates| Client["Client components<br/>cart · drawer · gear customizer<br/>cookie banner · scroll spy"]
     Client <-->|cart + consent| LS[("localStorage")]
@@ -295,7 +297,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 **Requirements:** Node.js 20+ and npm.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/AmaanAli1/rep-theory.git
+cd rep-theory
 cd cp340
 npm install
 npm run dev
@@ -337,9 +340,26 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 - [x] **Assignment 1:** home, product pages, blog + intro post, about, privacy settings
 - [x] **Assignment 2:** cart + mini cart, Stripe checkout with subscriptions, order confirmation, 3 blog posts, social section, SEO
-- [ ] **Assignment 3:** analytics (only with cookie consent), live social accounts, customer engagement, free program assessment
-- [ ] **Later:** accounts + Stripe customer portal for managing coaching subscriptions
-- [ ] **Testing:** Playwright end-to-end tests in GitHub Actions on every push
+- [ ] **Assignment 3** (group): analytics with cookie consent, live social accounts, customer engagement, free program assessment
+
+### 🌱 To be continued: my own learning and development
+
+- [ ] **Automated testing:** Playwright end-to-end tests for the cart, checkout and journal, running in GitHub Actions on every push
+- [ ] **Unit tests** for pricing, tax and shipping logic
+- [ ] **Accounts + Stripe customer portal** so coaching subscribers can manage their plan
+- [ ] **Performance and accessibility:** push the Lighthouse scores to 100 across the board
+
+---
+
+## 🤖 How I built this
+
+I built Rep Theory with **Claude** (Anthropic) as a design partner and coding assistant, and used the project to level up my own skills.
+
+- **Design:** explored layouts and visual directions on Claude's design canvas, gave feedback through comments, and turned the mockups I picked into real components.
+- **Agentic workflow:** worked mockup first, then confirmed the plan, built and tested. Claude helped plan features, write and refactor code, run browser tests at multiple screen sizes, and catch bugs before they reached users.
+- **Learning:** I treated it like pair programming with a mentor: asking *why* as well as *how*, from Stripe Checkout sessions and server-side re-pricing to SEO metadata and accessible animations.
+
+I made the product and design decisions, reviewed every change, and tested everything on the live site. Honestly, I had a blast building it.
 
 ---
 
