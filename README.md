@@ -5,6 +5,7 @@
 ### Gear and training programs built for the last rep.
 
 [![Live site](https://img.shields.io/badge/live-rep--theory.vercel.app-ff5a1f?style=for-the-badge&logo=vercel&logoColor=white)](https://rep-theory.vercel.app)
+[![Project report](https://img.shields.io/badge/project_report-PDF-0e0e0e?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](docs/Rep-Theory-A2-Report-Portfolio.pdf)
 [![Security headers](https://img.shields.io/badge/security_headers-A-0e0e0e?style=for-the-badge)](https://securityheaders.com/?q=https%3A%2F%2Frep-theory.vercel.app)
 
 ![Next.js](https://img.shields.io/badge/Next.js_16-0e0e0e?style=flat-square&logo=nextdotjs&logoColor=white)
